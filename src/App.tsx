@@ -3,22 +3,39 @@ import './App.css'
 
 function App() {
   
-  const adminLogin = "adminG7";
-  const adminPassword = "SWE123";
+
+  function Dashboard(){
+    return (
+      <div className="dashboard">
+        <h2>Grocery List Dashboard</h2>
+      </div>
+    );
+  }
+
+
+  const adminLogin = "";
+  const adminPassword = "";
   
   const [username, checkUsername] = useState('');
   const [password, checkPassword] = useState('');
+  const [isLoggedIn, checkIsLoggedIn] = useState(false);
 
   const login = (form: { preventDefault: () => void; }) => {
     form.preventDefault();
     if (username === adminLogin && password == adminPassword){
       console.log("admin logged in");
+      checkIsLoggedIn(true);
     }
   }
 
 
   return (
-    
+    <div>
+      {isLoggedIn ? (
+        <Dashboard />
+      ) : (
+      
+
       <div className='login'>
 
         <h2>Login Page</h2>
@@ -38,8 +55,8 @@ function App() {
         </form>
       
       </div>
-      
-  
+      )}
+  </div>
   )
 }
 
