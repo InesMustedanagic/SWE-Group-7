@@ -3,29 +3,52 @@ import './App.css'
 
 function App() {
   
+  function Dashboard() {
 
-  function Dashboard(){
-    
-    function listClick(){
-      console.log("list clicked")
+    function GroceryList() {
+
     }
     
-    
+    function listClick() {
+      console.log("list clicked")
+    }
+
+    const [Pressed, IsPressed] = useState(false);
+
+    const Create_Grocery_List =(form: { preventDefault: () => void; }) => {
+      form.preventDefault();
+      console.log("admin clicked");
+      IsPressed(true)
+    }
+
     return (
       
-        
         <div className="dashboard">
           <h2>Grocery List Dashboard</h2>
         
 
         <div className="dashboard-list" onClick={listClick}>
-            <h2> Create Grocery List </h2>
+          <h2> Create Grocery List </h2>
+          function listClick() {
+
+          }
+          {Pressed ? (
+            <GroceryList />
+          ) : (
+            <form onSubmit={login}>
+          
+            </form>
+          )}
+            
         </div>
       
         </div>
     );
   }
 
+  function GroceryList() {
+
+  }
 
   const adminLogin = "";
   const adminPassword = "";
@@ -42,14 +65,12 @@ function App() {
     }
   }
 
-
   return (
     <div>
       {isLoggedIn ? (
         <Dashboard />
       ) : (
       
-
       <div className='login'>
 
         <h2>Login Page</h2>
