@@ -5,10 +5,24 @@ function App() {
   
 
   function Dashboard(){
+    
+    function listClick(){
+      console.log("list clicked")
+    }
+    
+    
     return (
-      <div className="dashboard">
-        <h2>Grocery List Dashboard</h2>
-      </div>
+      
+        
+        <div className="dashboard">
+          <h2>Grocery List Dashboard</h2>
+        
+
+        <div className="dashboard-list" onClick={listClick}>
+            <h2> Create Grocery List </h2>
+        </div>
+      
+        </div>
     );
   }
 
