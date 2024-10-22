@@ -38,6 +38,11 @@ html, body {
   cursor: pointer
 }
 
+.picks{
+  display: flex;
+  padding: 20px;
+}
+
 form div {
   margin-bottom: 0.7rem;
   color: black;
