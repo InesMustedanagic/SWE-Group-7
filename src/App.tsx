@@ -27,8 +27,7 @@ function App() {
     );
   }
 
-  function GroceryList(){
-
+  function GroceryList() {
     const [availableItems] = useState([
       "Apples",
       "Bananas",
@@ -36,34 +35,36 @@ function App() {
       "Milk",
       "Eggs",
     ]);
-    const [currentList, checkCurrentList] = useState([])
-
+    const [currentList, checkCurrentList] = useState<string[]>([]); // Specify the type for TypeScript
+  
     const addItem = (item: string) => {
-
-    }
-
-    return(
+      // Add the item to the current list
+      checkCurrentList(prevList => [...prevList, item]);
+    };
+  
+    return (
       <div className='picks'>
         <div>
-        <h2>Available picks!</h2>
+          <h2>Available picks!</h2>
           <ul>
             {availableItems.map((item, index) => (
               <li key={index}>
                 {item}
-              <button onClick={() => addItem(item)}>Add</button>
+                <button onClick={() => addItem(item)}>Add</button>
               </li>
             ))}
           </ul>
-          </div>
-          <div>
-        <h2>Current picks</h2>
+        </div>
+        <div>
+          <h2>Current picks</h2>
           <ul>
-
+            {currentList.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
-
         </div>
       </div>
-    )
+    );
   }
 
   const adminLogin = "";
@@ -117,3 +118,6 @@ function App() {
 }
 
 export default App
+
+
+
