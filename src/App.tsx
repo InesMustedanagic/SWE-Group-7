@@ -35,27 +35,53 @@ function App() {
       "Milk",
       "Eggs",
     ]);
-    const [currentList, checkCurrentList] = useState<string[]>([]); // Specify the type for TypeScript
+    const [currentList, checkCurrentList] = useState<string[]>([]);
   
     const addItem = (item: string) => {
       // Add the item to the current list
       checkCurrentList(prevList => [...prevList, item]);
     };
+
+    const [favorite, checkFavorite] = useState<string[]>([]);
+    const addFavorite = (item: string) => {
+      
+      checkFavorite(prevList => {
+      if (prevList.includes(item)){
+        return prevList.filter(fav => fav !== item);
+      }
+      else{
+        return [...prevList, item];
+    }
+      });
+    };
+
   
     return (
       <div className='picks'>
-        <div>
+        <div className='available'>
           <h2>Available picks!</h2>
           <ul>
             {availableItems.map((item, index) => (
               <li key={index}>
+                <button onClick={() => addFavorite(item)}>❤️</button>
                 {item}
                 <button onClick={() => addItem(item)}>Add</button>
               </li>
             ))}
           </ul>
         </div>
-        <div>
+        
+        <div className='favorite'>
+          <h2>Favorites</h2>
+          <ul>
+            {favorite.map((item, index) => (
+              <li key={index}>{item}</li>
+              
+            ))}
+          </ul>
+        </div>
+        
+        <div className='current'>
           <h2>Current picks</h2>
           <ul>
             {currentList.map((item, index) => (

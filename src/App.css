@@ -40,9 +40,26 @@ html, body {
 
 .picks{
   display: flex;
-  padding: 20px;
+  padding: 5%;
+  justify-content: space-around;
 }
 
+ul {
+  list-style-type: none;
+  padding: 1%;
+}
+
+.available{
+  width: 25%;
+}
+
+.favorite{
+  width: 25%;
+}
+
+.current{
+  width: 25%;
+}
 form div {
   margin-bottom: 0.7rem;
   color: black;
