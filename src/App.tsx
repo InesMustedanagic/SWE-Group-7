@@ -35,7 +35,6 @@ function App() {
       "Milk",
       "Eggs",
     ]);
-<<<<<<< HEAD
     const [currentList, checkCurrentList] = useState<string[]>([]); // Specify the type for TypeScript
     const [availableMeals] = useState(["Burgers", "Chicken Tenders", "Lasagna", "Salad"]);
     const [chosenMeals, checkMeals] = useState<string[]>([]);
@@ -45,20 +44,14 @@ function App() {
     const [Lasagna] = useState(["Tomato", "Cheese", "Meat"]);
     const [Salad] = useState(["Lettuce", "Tomato", "Dressing", "Cheese"]);
 
-=======
-    const [currentList, checkCurrentList] = useState<string[]>([]);
-  
->>>>>>> refs/remotes/origin/main
     const addItem = (item: string) => {
       // Add the item to the current list
       checkCurrentList(prevList => [...prevList, item]);
     };
-<<<<<<< HEAD
     const addMeal = (item: string) => {
       // Add the item to the current list
       checkMeals(prevList => [...prevList, item]);
     };
-=======
 
     const [favorite, checkFavorite] = useState<string[]>([]);
     const addFavorite = (item: string) => {
@@ -73,7 +66,6 @@ function App() {
       });
     };
 
->>>>>>> refs/remotes/origin/main
   
     return (
       <div className='picks'>
