@@ -36,10 +36,21 @@ function App() {
       "Eggs",
     ]);
     const [currentList, checkCurrentList] = useState<string[]>([]); // Specify the type for TypeScript
-  
+    const [availableMeals] = useState(["Burgers", "Chicken Tenders", "Lasagna", "Salad"]);
+    const [chosenMeals, checkMeals] = useState<string[]>([]);
+
+    const [Burgers] = useState(["Bread", "Lettuce", "Meat", "Tomato", "Onions"]);
+    const [Chicken_Tenders] = useState(["Chicken", "Fries", "Ketchup"]);
+    const [Lasagna] = useState(["Tomato", "Cheese", "Meat"]);
+    const [Salad] = useState(["Lettuce", "Tomato", "Dressing", "Cheese"]);
+
     const addItem = (item: string) => {
       // Add the item to the current list
       checkCurrentList(prevList => [...prevList, item]);
+    };
+    const addMeal = (item: string) => {
+      // Add the item to the current list
+      checkMeals(prevList => [...prevList, item]);
     };
   
     return (
@@ -60,6 +71,26 @@ function App() {
           <ul>
             {currentList.map((item, index) => (
               <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2>Meal Plan Options</h2>
+          <ul>
+            {availableMeals.map((item, index) => (
+              <li key={index}>{item}<button onClick={() => addMeal(item)}>Choose</button></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2>Meal Plans Chosen</h2>
+          <ul>
+            {chosenMeals.map((item, index) => (
+              <li key={index}>{item}<li>ingredients:</li>
+                {item === "Burgers" ? Burgers.map((item, index) => (<li key={index}>{item}</li>)) :
+                item === "Chicken Tenders" ? Chicken_Tenders.map((item, index) => (<li key={index}>{item}</li>)) :
+                item === "Lasagna" ? Lasagna.map((item, index) => (<li key={index}>{item}</li>)) :
+                item === "Salad" ? Salad.map((item, index) => (<li key={index}>{item}</li>)) : null}</li>
             ))}
           </ul>
         </div>
