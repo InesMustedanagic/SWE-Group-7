@@ -50,10 +50,18 @@ function App() {
     };
     const addMeal = (item: string) => {
       // Add the item to the current list
-      checkMeals(prevList => [...prevList, item]);
+      checkMeals(prevList => {
+        if (prevList.includes(item)) {
+          return prevList.filter(meal => meal !== item);
+        } else {
+          return [...prevList, item];
+        }
+      });
+        
     };
 
     const [favorite, checkFavorite] = useState<string[]>([]);
+
     const addFavorite = (item: string) => {
       
       checkFavorite(prevList => {
@@ -66,6 +74,17 @@ function App() {
       });
     };
 
+    const [Review, checkReview] = useState('')
+    // const [,Reviews] = useState<string[]>([]);
+    const Reviews = (value: string) => {
+      checkReview(value)
+    }
+    // const [,checkReview] = useState<string[]>([]);
+    const addReview = (item: string) => {
+      console.log('Review added:', Review);
+      checkReview('');
+      // Reviews(prevList => [...prevList, item]);
+    }
   
     return (
       <div className='picks'>
@@ -100,7 +119,8 @@ function App() {
             ))}
           </ul>
         </div>
-        <div>
+
+        <div className='mealoptions'>
           <h2>Meal Plan Options</h2>
           <ul>
             {availableMeals.map((item, index) => (
@@ -108,7 +128,8 @@ function App() {
             ))}
           </ul>
         </div>
-        <div>
+
+        <div className='mealchosen'>
           <h2>Meal Plans Chosen</h2>
           <ul>
             {chosenMeals.map((item, index) => (
@@ -116,8 +137,16 @@ function App() {
                 {item === "Burgers" ? Burgers.map((item, index) => (<li key={index}>{item}</li>)) :
                 item === "Chicken Tenders" ? Chicken_Tenders.map((item, index) => (<li key={index}>{item}</li>)) :
                 item === "Lasagna" ? Lasagna.map((item, index) => (<li key={index}>{item}</li>)) :
-                item === "Salad" ? Salad.map((item, index) => (<li key={index}>{item}</li>)) : null}</li>
+                item === "Salad" ? Salad.map((item, index) => (<li key={index}>{item}</li>)) : null}<p></p></li>
             ))}
+          </ul>
+        </div>
+
+        <div className='userreview'>
+          <h2>User Reviews</h2>
+          <ul>
+          
+            <input value={Review} onChange={(form) => Reviews(form.target.value)}></input><button onClick={() => addReview(Review)}>Add</button>
           </ul>
         </div>
       </div>
