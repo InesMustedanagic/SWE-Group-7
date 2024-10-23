@@ -1,9 +1,11 @@
+// need to separate this file into components to be less confusing
+
 import { useState } from 'react';
 import './App.css'
 
 function App() {
   
-
+  // changes state of grocery list view
   function Dashboard(){
     
     function listClick(){
@@ -12,21 +14,20 @@ function App() {
     }
     
     
+    // returning the page to be viewed when state changed
     return (
       
-        
         <div className="dashboard">
           <h2>Grocery List Dashboard</h2>
-        
-
-        <div className="dashboard-list" onClick={listClick}>
-            <h2> Create Grocery List </h2>
-        </div>
+          <div className="dashboard-list" onClick={listClick}>
+              <h2> Create Grocery List </h2>
+          </div>
       
         </div>
     );
   }
 
+  // function to display grocery list page
   function GroceryList() {
     const [availableItems] = useState([
       "Apples",
@@ -35,7 +36,10 @@ function App() {
       "Milk",
       "Eggs",
     ]);
-    const [currentList, checkCurrentList] = useState<string[]>([]); // Specify the type for TypeScript
+
+
+    // creating use states to be updated
+    const [currentList, checkCurrentList] = useState<string[]>([]);
     const [availableMeals] = useState(["Burgers", "Chicken Tenders", "Lasagna", "Salad"]);
     const [chosenMeals, checkMeals] = useState<string[]>([]);
 
@@ -44,12 +48,14 @@ function App() {
     const [Lasagna] = useState(["Tomato", "Cheese", "Meat"]);
     const [Salad] = useState(["Lettuce", "Tomato", "Dressing", "Cheese"]);
 
+    // add items to current picks
     const addItem = (item: string) => {
-      // Add the item to the current list
       checkCurrentList(prevList => [...prevList, item]);
     };
+
+    // add meal function
+    // toggles ingredients if selected
     const addMeal = (item: string) => {
-      // Add the item to the current list
       checkMeals(prevList => {
         if (prevList.includes(item)) {
           return prevList.filter(meal => meal !== item);
@@ -60,10 +66,13 @@ function App() {
         
     };
 
+
+    // use state for favorite item
     const [favorite, checkFavorite] = useState<string[]>([]);
 
+
+    // toggles favorite if button clicked and displays
     const addFavorite = (item: string) => {
-      
       checkFavorite(prevList => {
       if (prevList.includes(item)){
         return prevList.filter(fav => fav !== item);
@@ -74,20 +83,25 @@ function App() {
       });
     };
 
+
+    // use state for user reviews
     const [Review, checkReview] = useState('')
-    // const [,Reviews] = useState<string[]>([]);
     const Reviews = (value: string) => {
       checkReview(value)
     }
-    // const [,checkReview] = useState<string[]>([]);
+
+
+    // logging user reviews
     const addReview = (item: string) => {
       console.log('Review added:', Review);
       checkReview('');
-      // Reviews(prevList => [...prevList, item]);
     }
-  
+    
+
+    // this is what will display on grocery page once use state is true
     return (
       <div className='picks'>
+        
         <div className='available'>
           <h2>Available picks!</h2>
           <ul>
@@ -153,14 +167,27 @@ function App() {
     );
   }
 
-  const adminLogin = "";
-  const adminPassword = "";
+
+  // admin login credentials
+  // maybe put in .env file
+  const adminLogin = "admin";
+  const adminPassword = "swe123";
   
+
+  // more use states
   const [username, checkUsername] = useState('');
   const [password, checkPassword] = useState('');
   const [isLoggedIn, checkIsLoggedIn] = useState(false);
   const [isGroceryList, checkGroceryList] = useState(false);
+  const [isCreatingAccount, checkIsCreatingAccount] = useState(false);
+  const [accountUsername, checkAccountUsername] = useState('');
+  const [accountPassword, checkAccountPassword] = useState('');
+  const [accountFirstName, checkAccountFirstName] = useState('');
+  const [accountLastName, checkAccountLastName] = useState('');
+  const [accountEmail, checkAccountEmail] = useState('');
 
+
+  // use state updating to see if admin is logging in
   const login = (form: { preventDefault: () => void; }) => {
     form.preventDefault();
     if (username === adminLogin && password == adminPassword){
@@ -169,12 +196,63 @@ function App() {
     }
   }
 
+  // use state to see if someone is creating account
+  const createAccount = (form: { preventDefault: () => void; }) => {
+    form.preventDefault();
+    console.log("create acc pressed")
+  };
+
+
+  // this returns the create account and login page. 
+  // this is a ternary operator and we should find easier way to implement this
+  // logic to see what page you should see depending on use states
 
   return (
     <div>
-      {isLoggedIn ? (
-        isGroceryList ? (
-          <GroceryList/> ) :
+      {isCreatingAccount ? 
+        
+        (
+        <div className='login'>
+          <h2>Create Account Page</h2>
+          <form onSubmit={createAccount}>
+            
+            <div>
+              <label>Username </label>
+              <input type="text" value={accountUsername} onChange={(form) => checkAccountUsername(form.target.value)} />
+            </div>
+            
+            <div>
+              <label>Password </label>
+              <input type="password" value={accountPassword} onChange={(form) => checkAccountPassword(form.target.value)} />
+            </div>
+
+            <div>
+              <label>First Name </label>
+              <input type="text" value={accountFirstName} onChange={(form) => checkAccountFirstName(form.target.value)} />
+            </div>
+
+            <div>
+              <label>Last Name </label>
+              <input type="text" value={accountLastName} onChange={(form) => checkAccountLastName(form.target.value)} />
+            </div>
+
+            <div>
+              <label>Email </label>
+              <input type="text" value={accountEmail} onChange={(form) => checkAccountEmail(form.target.value)} />
+            </div>
+
+            <button type="submit">Create Account</button>
+            <button onClick={() => checkIsCreatingAccount(false)}>Cancel</button>
+          </form>
+        </div>
+      ) :
+      
+      isLoggedIn ? 
+      (
+        isGroceryList ? 
+        (
+          <GroceryList/> ) 
+          :
           ( <Dashboard /> )
       ) : (
       
@@ -193,7 +271,7 @@ function App() {
             <label>Password </label>
             <input type="password" value={password} onChange={(form) => checkPassword(form.target.value)}/>
           </div>
-
+          <button type='button' className='createAccount' onClick={() => checkIsCreatingAccount(true)}>Create Account</button>
           <button type="submit">Login</button>
         </form>
       

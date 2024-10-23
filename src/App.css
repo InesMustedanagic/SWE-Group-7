@@ -44,7 +44,6 @@ html, body {
 .picks{
   height: 100vh;
   width: 100vw;
-  background-image: url(./Food.png);
   display: flex;
   padding: 5%;
   justify-content: space-around;
@@ -53,6 +52,14 @@ html, body {
 ul {
   list-style-type: none;
   padding: 1%;
+}
+
+.createAccount{
+  padding: 3px 12px;
+  font-size: 14px;
+}
+button {
+  margin: 1% 1%;
 }
 
 .available{
