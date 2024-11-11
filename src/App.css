@@ -47,6 +47,7 @@ html, body {
   display: flex;
   padding: 5%;
   justify-content: space-around;
+  background-color: cyan;
 }
 
 ul {
@@ -111,6 +112,35 @@ form div {
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+
+
+.available, .favorite, .current, .mealoptions, .mealchosen, .userreview {
+  padding: 16px;
+  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+button {
+  
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 @keyframes logo-spin {

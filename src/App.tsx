@@ -58,12 +58,28 @@ function App() {
     const addMeal = (item: string) => {
       checkMeals(prevList => {
         if (prevList.includes(item)) {
+          checkCurrentList(prevList => prevList.filter(ingredient => !getIngredients(item).includes(ingredient)));
           return prevList.filter(meal => meal !== item);
         } else {
+          checkCurrentList(prevList => [...prevList, ...getIngredients(item)]);
           return [...prevList, item];
         }
       });
-        
+    };
+    
+    const getIngredients = (meal: string) => {
+      switch (meal) {
+        case "Burgers":
+          return Burgers;
+        case "Chicken Tenders":
+          return Chicken_Tenders;
+        case "Lasagna":
+          return Lasagna;
+        case "Salad":
+          return Salad;
+        default:
+          return [];
+      }
     };
 
 
@@ -83,6 +99,9 @@ function App() {
       });
     };
 
+    const removeItem = (item: string) => {
+      checkCurrentList(prevList => prevList.filter(currentItem => currentItem !== item));
+    };
 
     // use state for user reviews
     const [Review, checkReview] = useState('')
@@ -129,7 +148,9 @@ function App() {
           <h2>Current picks</h2>
           <ul>
             {currentList.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index}>{item}
+              <button onClick={() => removeItem(item)}>Remove</button>
+              </li>
             ))}
           </ul>
         </div>
@@ -143,7 +164,7 @@ function App() {
           </ul>
         </div>
 
-        <div className='mealchosen'>
+        {/* <div className='mealchosen'>
           <h2>Meal Plans Chosen</h2>
           <ul>
             {chosenMeals.map((item, index) => (
@@ -154,7 +175,7 @@ function App() {
                 item === "Salad" ? Salad.map((item, index) => (<li key={index}>{item}</li>)) : null}<p></p></li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         <div className='userreview'>
           <h2>User Reviews</h2>
