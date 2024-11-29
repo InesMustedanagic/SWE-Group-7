@@ -1,22 +1,30 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
   display: block;
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
   background-color: #333333;
   color: #FFD700;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .groceryList {
   padding-top: 100px;
-  display: inline;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 200px;
+  height: auto;
 }
 
 .available, .current, .mealoptions {
@@ -38,7 +46,7 @@ html, body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: auto;
+  margin: 0;
   border: 6px solid #FFD700;
   color: #FFD700;
   padding: 30px;
@@ -77,13 +85,14 @@ html, body {
 }
 
 .dashboard {
+  display: flex;
   height: 100vh;
   width: 100vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: auto;
+  margin: 0;
 }
 
 .dashboard-list {
@@ -94,8 +103,7 @@ html, body {
   border-radius: 8px;
   width: 300px;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
 }
 
 .items {
@@ -126,4 +134,20 @@ html, body {
 
 .topDiv {
   margin-top: 100px;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: none;
+  color: #FFD700;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  color: #FFC107;
 }

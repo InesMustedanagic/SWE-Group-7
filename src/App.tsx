@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  function BackButton({ onClick }: { onClick: () => void }) {
+    return (
+      <button className="back-button" onClick={onClick}>
+        ← Back
+      </button>
+    );
+  }
+
   function GroceryList() {
     const [availableItems] = useState(["Apples", "Bananas", "Bread", "Milk", "Eggs", "Tomato"]);
     const [currentList, checkCurrentList] = useState<{ item: string; quantity: number }[]>([]);
@@ -16,14 +24,12 @@ function App() {
       checkCurrentList((prevList) => {
         const existingItem = prevList.find((listItem) => listItem.item === item);
         if (existingItem) {
-          // If the item exists, increment quantity by 1
           return prevList.map((listItem) =>
             listItem.item === item
               ? { ...listItem, quantity: listItem.quantity + 1 }
               : listItem
           );
         } else {
-          // If it doesn't exist, add it with quantity 1
           return [...prevList, { item, quantity: 1 }];
         }
       });
@@ -63,7 +69,6 @@ function App() {
 
     return (
       <div className="groceryList">
-        {/* Available Picks */}
         <div className="available">
           <h2>Available Picks</h2>
           <ul className="items">
@@ -78,7 +83,6 @@ function App() {
           </ul>
         </div>
 
-        {/* Current Picks */}
         <div className="current">
           <h2>Current Picks</h2>
           <ul className="items">
@@ -93,7 +97,6 @@ function App() {
           </ul>
         </div>
 
-        {/* Meal Plan Options */}
         <div className="mealoptions">
           <h2>Meal Plan Options</h2>
           <ul className="items">
@@ -127,6 +130,16 @@ function App() {
     }
   };
 
+  const goToDashboard = () => {
+    checkGroceryList(false);
+  };
+
+  const logout = () => {
+    checkIsLoggedIn(false);
+    checkUsername('');
+    checkPassword('');
+  };
+
   const createAccount = (form: { preventDefault: () => void }) => {
     form.preventDefault();
     console.log("Create account pressed");
@@ -150,6 +163,11 @@ function App() {
 
   return (
     <div className='topDiv'>
+      {isLoggedIn && (
+        <BackButton
+          onClick={isGroceryList ? goToDashboard : logout}
+        />
+      )}
       {isCreatingAccount ? (
         <div className="login">
           <h2>Create Account</h2>
@@ -188,6 +206,3 @@ function App() {
 }
 
 export default App;
-
-
-
