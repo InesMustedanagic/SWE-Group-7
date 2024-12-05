@@ -1,16 +1,15 @@
 import React from 'react';
-// import 'Payment.css';
 
 interface PaymentProps {
-  totalAmount: number; // The total price of the items in the cart
-  onPaymentSuccess: () => void; // Callback to navigate back to the dashboard after successful payment
+  totalAmount: number;
+  onPaymentSuccess: () => void;
 }
 
 const Payment: React.FC<PaymentProps> = ({ totalAmount, onPaymentSuccess }) => {
   const handlePayment = () => {
-    // Simulate payment success (you can integrate a real payment gateway here)
+    
     console.log('Payment processed!');
-    onPaymentSuccess(); // After payment success, navigate to dashboard or reset state
+    onPaymentSuccess();
   };
 
   return (

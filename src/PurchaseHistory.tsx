@@ -1,6 +1,6 @@
-// PurchaseHistory.tsx
+
 import React, { useState, useEffect } from 'react';
-// import './PurchaseHistory.css';
+
 import { db } from './firebase-config';
 import { collection, getDocs } from 'firebase/firestore';
 

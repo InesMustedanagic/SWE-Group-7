@@ -1,8 +1,6 @@
-// src/firebase-service.ts
 import { db } from './firebase-config';
 import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
 
-// Function to add a review to Firestore
 export const addReviewToFirestore = async (review: string, userId: string) => {
   try {
     const reviewsCollection = collection(db, 'reviews');
@@ -17,7 +15,6 @@ export const addReviewToFirestore = async (review: string, userId: string) => {
   }
 };
 
-// Function to fetch reviews from Firestore
 export const getReviewsFromFirestore = async () => {
   try {
     const reviewsCollection = collection(db, 'reviews');

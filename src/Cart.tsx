@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface CartProps {
-  currentList: string[]; // The list of items in the cart
-  onRemoveItem: (item: string) => void; // Function to remove items from the cart
-  onProceedToPayment: () => void; // Function to navigate to the payment page
+  currentList: string[];
+  onRemoveItem: (item: string) => void;
+  onProceedToPayment: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({ currentList, onRemoveItem, onProceedToPayment }) => {

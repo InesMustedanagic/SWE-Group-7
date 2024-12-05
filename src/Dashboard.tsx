@@ -1,6 +1,5 @@
-// Dashboard.tsx
 import React from 'react';
-import './Dashboard.css';
+import './App.css';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 
@@ -12,20 +11,28 @@ interface DashboardProps {
   onNavigateToPurchaseHistory: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onNavigateToList, onNavigateToCart, onNavigateToPayment, onNavigateToAccount, onNavigateToPurchaseHistory}) => {
+const Dashboard: React.FC<DashboardProps> = ({
+  onNavigateToList,
+  onNavigateToCart,
+  onNavigateToPayment,
+  onNavigateToAccount,
+  onNavigateToPurchaseHistory,
+}) => {
   const logout = async () => {
     try {
-      await signOut(auth); // Sign out the user
-      console.log("User logged out");
+      await signOut(auth);
+      console.log('User logged out');
     } catch (error) {
-      console.error("Error signing out:", error);
+      console.error('Error signing out:', error);
     }
   };
 
   return (
     <div className="dashboard">
+      <button className="back-button" onClick={logout}>
+        Logout
+      </button>
       <h2>Grocery List Dashboard</h2>
-      <button onClick={logout}>Logout</button>
       <div className="dashboard-list" onClick={onNavigateToList}>
         <h2>Create Grocery List</h2>
       </div>
@@ -35,11 +42,15 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigateToList, onNavigateToCar
       <div className="dashboard-list" onClick={onNavigateToAccount}>
         <h2>Update Profile</h2>
       </div>
-      <button onClick={onNavigateToCart}>Go to Cart</button>
-      <button onClick={onNavigateToPayment}>Proceed to Payment</button>
+      <div className="dashboard-buttons">
+        <button className="add" onClick={onNavigateToCart}>
+          Go to Cart
+        </button>
+        <button className="add" onClick={onNavigateToPayment}>
+          Proceed to Payment
+        </button>
+      </div>
     </div>
-
-    
   );
 };
 

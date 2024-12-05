@@ -11,7 +11,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null);
 
     if (!email || !password) {
       setError('Please enter both email and password');
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in');
     } catch (error: any) {
-      setError(error.message); // Display error message
+      setError(error.message);
     } finally {
       setLoading(false);
     }

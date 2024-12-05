@@ -12,7 +12,7 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null);
 
     if (!email || !password || !confirmPassword) {
       setError('Please fill in all fields');
@@ -35,46 +35,40 @@ const Signup: React.FC = () => {
       await createUserWithEmailAndPassword(auth, email, password);
       console.log('User registered');
     } catch (error: any) {
-      setError(error.message); // Display Firebase error message
+      setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="signup">
+    <div className="login">
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
         {error && <div className="error-message">{error}</div>}
         <button type="submit" disabled={loading}>
           {loading ? 'Creating Account...' : 'Sign Up'}

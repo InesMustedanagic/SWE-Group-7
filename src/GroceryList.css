@@ -1,36 +1,10 @@
-/* .picks {
-    position: relative; /* This is needed to position the button at the bottom */
-    /* padding-bottom: 60px; /* Add some padding at the bottom to make space for the button */
-  /* }
-  
-  .back-to-dashboard-btn {
-    position: absolute;
-    bottom: 20px; /* Position the button at the bottom */
-    /* left: 50%;
-    transform: translateX(-50%); /* Center the button horizontally */
-    /* padding: 8px 16px; /* Small button size */
-    /* font-size: 14px; /* Smaller text size */
-    /* background-color: #4CAF50; /* Button color */
-    /* color: white; /* Text color */
-    /* border: none;
-    border-radius: 5px; /* Rounded corners */
-    /* cursor: pointer;
-    transition: background-color 0.3s ease; */ */ */ */ */ */
-  /* } */
-  
-  /* .back-to-dashboard-btn:hover {
-    background-color: #45a049; /* Darker green on hover */
-  /* } */ */ */ */ */ */
 
-
-
-/* Container for the grocery list */
 .grocery-list-container {
     display: flex;
     justify-content: center;
     padding: 20px;
     width: 100%;
-    background-color: #f7f7f7; /* Light gray background for the whole container */
+    background-color: #f7f7f7;
   }
   
   .grocery-list-content {
@@ -40,7 +14,7 @@
     flex-direction: column;
   }
   
-  /* Style for the category list (Beverages, Dairy, Fruits) */
+
   .category-list {
     list-style: none;
     padding: 0;
@@ -48,11 +22,10 @@
     width: 100%;
   }
   
-  /* Style for each category item (e.g., Beverages, Dairy, Fruits) */
   .category-item {
     padding: 15px;
-    background-color: white;  /* White background for category items */
-    color: black;             /* Black text color */
+    background-color: white;
+    color: black;
     margin: 5px 0;
     cursor: pointer;
     font-weight: bold;
@@ -61,16 +34,14 @@
     width: 100%;
     box-sizing: border-box;
     border-radius: 4px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background-color 0.3s ease;  /* Smooth background transition */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
   }
   
-  /* Hover effect for category items */
   .category-item:hover {
-    background-color: #f0f0f0; /* Light hover effect */
+    background-color: #f0f0f0;
   }
   
-  /* Style for the item list (Milk, Juice, Cheese, etc.) */
   .item-list {
     list-style: none;
     padding: 0;
@@ -79,15 +50,15 @@
     box-sizing: border-box;
   }
   
-  /* Style for individual items inside a category */
+  
   .item {
     display: flex;
     justify-content: space-between;
     padding: 10px;
     width: 100%;
-    background-color: white;  /* White background for item list */
-    border-bottom: 1px solid #ddd;  /* Light border between items */
-    color: black;               /* Black text color for the items */
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    color: black;
   }
   
   .item span {
@@ -101,14 +72,14 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease; /* Smooth button hover transition */
+    transition: background-color 0.3s ease;
   }
   
   .item button:hover {
     background-color: #45a049;
   }
   
-  /* Style for the back to dashboard button */
+  
   .back-to-dashboard {
     margin-top: 20px;
     padding: 10px 20px;
