@@ -1,9 +1,9 @@
-
+// src/firebase-config.ts
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { browserLocalPersistence, getAuth } from 'firebase/auth';
 
-
+// Your Firebase config object from the Firebase Console
 const firebaseConfig = {
     apiKey: "AIzaSyAaSUj1CSmoJKLoSthzty_PBLYaSFDsImE",
     authDomain: "grocery-website-48384.firebaseapp.com",
@@ -14,13 +14,87 @@ const firebaseConfig = {
     measurementId: "G-RMMCWEVXKQ"
 };
 
-
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
+// Initialize Firestore and Auth
 const db = getFirestore(app);
 
 const auth = getAuth(app);
 auth.setPersistence(browserLocalPersistence);
 
+// Function to add a grocery item to Firestore
+const addGroceryItem = async (itemName: string, itemPrice: number) => {
+    try {
+      const docRef = await addDoc(collection(db, 'groceries'), {
+        name: itemName,
+        price: itemPrice,
+        createdAt: new Date(),
+      });
+      console.log('Document written with ID: ', docRef.id);
+    } catch (e) {
+      console.error('Error adding document: ', e);
+    }
+  };
+
 export { db, auth };
+
+
+// // src/firebase-service.ts
+// import { db } from './firebase-config';
+// import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
+
+// // Function to add a review to Firestore
+// export const addReviewToFirestore = async (review: string, userId: string) => {
+//   try {
+//     const reviewsCollection = collection(db, 'reviews');
+//     await addDoc(reviewsCollection, {
+//       review,
+//       userId,
+//       timestamp: new Date(),
+//     });
+//     console.log('Review added!');
+//   } catch (error) {
+//     console.error('Error adding review: ', error);
+//   }
+// };
+
+// // Function to fetch reviews from Firestore
+// export const getReviewsFromFirestore = async () => {
+//   try {
+//     const reviewsCollection = collection(db, 'reviews');
+//     const reviewsSnapshot = await getDocs(reviewsCollection);
+//     const reviewsList = reviewsSnapshot.docs.map(doc => doc.data());
+//     return reviewsList;
+//   } catch (error) {
+//     console.error('Error fetching reviews: ', error);
+//     return [];
+//   }
+// };
+
+
+// // src/auth-service.ts
+// import { auth } from './firebase-config';
+// import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+
+// // Function to log in a user
+// export const loginUser = async (email: string, password: string) => {
+//   try {
+//     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+//     return userCredential.user;
+//   } catch (error) {
+//     console.error('Login error: ', error);
+//     throw error;
+//   }
+// };
+
+// // Function to create a new user
+// export const createUser = async (email: string, password: string) => {
+//   try {
+//     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+//     return userCredential.user;
+//   } catch (error) {
+//     console.error('Account creation error: ', error);
+//     throw error;
+//   }
+// };
