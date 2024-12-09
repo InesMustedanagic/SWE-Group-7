@@ -1,6 +1,4 @@
-
 import React, { useState, useEffect } from 'react';
-
 import { db } from './firebase-config';
 import { collection, getDocs } from 'firebase/firestore';
 
@@ -35,12 +33,12 @@ const PurchaseHistory: React.FC<PurchaseHistoryProps> = ({ onBackToDashboard }) 
         <p>No purchase history found.</p>
       ) : (
         <ul>
-          {purchaseHistory.map((purchase, index) => (
-            <li key={index}>
+          {purchaseHistory.map((purchase) => (
+            <li key={purchase.id}>
               <strong>Order #{purchase.id}</strong><br />
               <span>Items: {purchase.items.join(', ')}</span><br />
               <span>Total: ${purchase.total}</span><br />
-              <span>Date: {new Date(purchase.date.seconds * 1000).toLocaleDateString()}</span>
+              <span>Date: {purchase.date ? new Date(purchase.date.seconds * 1000).toLocaleDateString() : "N/A"}</span>
             </li>
           ))}
         </ul>
