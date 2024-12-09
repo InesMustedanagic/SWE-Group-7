@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './Payment.css';
 
 interface PaymentProps {
-  totalAmount: number; // The total price of the items in the cart
-  onSuccess: () => void; // Callback to navigate back to the dashboard after successful payment
-  onCancel: () => void;  // Callback for when the user cancels the payment
+  totalAmount: number;
+  onSuccess: () => void;
+  onCancel: () => void;
 }
 
 const Payment: React.FC<PaymentProps> = ({ totalAmount, onSuccess, onCancel }) => {
@@ -26,7 +26,7 @@ const Payment: React.FC<PaymentProps> = ({ totalAmount, onSuccess, onCancel }) =
       return false;
     }
 
-    // Basic validation for card number and CVV length
+    
     if (!/^\d{16}$/.test(cardNumber)) {
       setError('Card number should be 16 digits.');
       return false;
@@ -37,7 +37,7 @@ const Payment: React.FC<PaymentProps> = ({ totalAmount, onSuccess, onCancel }) =
       return false;
     }
 
-    // Basic validation for expiration date (MM/YY format)
+    
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expirationDate)) {
       setError('Expiration date should be in MM/YY format.');
       return false;
@@ -49,9 +49,9 @@ const Payment: React.FC<PaymentProps> = ({ totalAmount, onSuccess, onCancel }) =
 
   const handlePayment = () => {
     if (validateForm()) {
-      // Simulate payment success (you can integrate a real payment gateway here)
+      
       console.log('Payment processed!');
-      onSuccess(); // After payment success, trigger onSuccess callback
+      onSuccess();
     }
   };
 
