@@ -1,8 +1,8 @@
 import { db } from './firebase-config';
 import { collection, addDoc, getDocs, query, where, updateDoc, doc } from 'firebase/firestore';
-import { GroceryItem } from './App';  // Import GroceryItem from App.tsx
+import { GroceryItem } from './App';
 
-// Function to add a grocery item to Firestore
+
 export const addGroceryItemToFirestore = async (item: { name: string; price: number }) => {
   try {
     const groceryItemsRef = collection(db, 'groceryItems');
@@ -13,25 +13,25 @@ export const addGroceryItemToFirestore = async (item: { name: string; price: num
   }
 };
 
-// Function to add a cart item to Firestore
+
 export const addCartItemToFirestore = async (userId: string, itemId: string) => {
   try {
     const cartRef = collection(db, 'carts');
     const querySnapshot = await getDocs(query(cartRef, where('userId', '==', userId)));
 
     if (querySnapshot.empty) {
-      // If the user doesn't have a cart yet, create a new cart
+      
       await addDoc(cartRef, {
         userId,
-        items: [itemId], // Initialize with the first item
+        items: [itemId],
       });
     } else {
-      // If the user already has a cart, update the existing cart
-      const cartDoc = querySnapshot.docs[0]; // Assuming only one cart per user
+      
+      const cartDoc = querySnapshot.docs[0];
       const cartRefToUpdate = doc(db, 'carts', cartDoc.id);
       const currentItems = cartDoc.data().items || [];
       await updateDoc(cartRefToUpdate, {
-        items: [...currentItems, itemId], // Add new item to the existing list
+        items: [...currentItems, itemId],
       });
     }
 
@@ -41,19 +41,19 @@ export const addCartItemToFirestore = async (userId: string, itemId: string) => 
   }
 };
 
-// Function to remove a cart item from Firestore
+
 export const removeCartItemFromFirestore = async (userId: string, itemId: string) => {
   try {
     const cartRef = collection(db, 'carts');
     const querySnapshot = await getDocs(query(cartRef, where('userId', '==', userId)));
 
     if (!querySnapshot.empty) {
-      const cartDoc = querySnapshot.docs[0]; // Assuming only one cart per user
+      const cartDoc = querySnapshot.docs[0];
       const cartRefToUpdate = doc(db, 'carts', cartDoc.id);
       const currentItems = cartDoc.data().items || [];
-      const updatedItems = currentItems.filter((cartItem: string) => cartItem !== itemId); // Remove item by id
+      const updatedItems = currentItems.filter((cartItem: string) => cartItem !== itemId);
 
-      // Update the cart in Firestore
+      
       await updateDoc(cartRefToUpdate, {
         items: updatedItems,
       });
@@ -66,14 +66,14 @@ export const removeCartItemFromFirestore = async (userId: string, itemId: string
 };
 
 
-// Function to fetch cart items for a user
+
 export const getCartItemsFromFirestore = async (userId: string) => {
   try {
     const cartRef = collection(db, 'carts');
     const querySnapshot = await getDocs(query(cartRef, where('userId', '==', userId)));
 
     if (!querySnapshot.empty) {
-      const cartDoc = querySnapshot.docs[0];  // Assuming only one cart per user
+      const cartDoc = querySnapshot.docs[0];
       return cartDoc.data().items || [];
     } else {
       return [];
@@ -84,7 +84,7 @@ export const getCartItemsFromFirestore = async (userId: string) => {
   }
 };
 
-// Function to store payment in Firestore
+
 export const storePaymentInFirestore = async (userId: string, totalAmount: number, items: string[]) => {
   try {
     const paymentRef = collection(db, 'purchaseHistory');
@@ -92,7 +92,7 @@ export const storePaymentInFirestore = async (userId: string, totalAmount: numbe
       userId,
       items,
       total: totalAmount,
-      date: new Date(), // Store the current date and time of the payment
+      date: new Date(),
     });
     console.log('Payment recorded in Firestore with ID: ', docRef.id);
   } catch (error) {

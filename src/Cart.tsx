@@ -23,18 +23,18 @@ const Cart: React.FC<CartProps> = ({
   onProceedToPayment,
   onBackToDashboard,
 }) => {
-  // Function to calculate the total amount
+  
   const calculateTotal = () => {
-    return currentList.reduce((sum, item) => sum + (item.price || 0), 0); // Ensure that each item's price is a valid number
+    return currentList.reduce((sum, item) => sum + (item.price || 0), 0);
   };
 
-  // Calculate the total dynamically
+
   const total = calculateTotal();
 
   return (
     <div>
       <h2>Your Cart</h2>
-      {/* Render cart items here */}
+      {}
       {currentList.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (

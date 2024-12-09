@@ -14,7 +14,8 @@ import PurchaseHistory from './PurchaseHistory';
 import Profile from './Profile';
 import { addCartItemToFirestore, removeCartItemFromFirestore, getCartItemsFromFirestore, storePaymentInFirestore } from './firebase-service';
 
-// Define GroceryItem interface
+
+
 export interface GroceryItem {
   id: string;
   name: string;
@@ -61,13 +62,13 @@ function App() {
   const loadUserCart = async (userId: string) => {
     const items = await getCartItemsFromFirestore(userId);
     setCurrentList(items);
-    const total = items.reduce((sum: number, item: GroceryItem) => sum + item.price, 0); // Ensure sum and item are typed correctly
+    const total = items.reduce((sum: number, item: GroceryItem) => sum + item.price, 0);
     setTotalAmount(total);
   };
 
   const handleAddToCart = (item: GroceryItem) => {
     if (auth.currentUser) {
-      // Add the item to Firestore by passing only the id (which is a string)
+      
       addCartItemToFirestore(auth.currentUser.uid, item.id);
       setCurrentList(prevList => [...prevList, item]);
       setTotalAmount(prevAmount => prevAmount + item.price);
@@ -76,7 +77,7 @@ function App() {
   
   const handleRemoveFromCart = (item: GroceryItem) => {
     if (auth.currentUser) {
-      // Remove the item from Firestore by passing only the id (which is a string)
+      
       removeCartItemFromFirestore(auth.currentUser.uid, item.id);
       setCurrentList(prevList => prevList.filter(i => i.id !== item.id));
       setTotalAmount(prevAmount => prevAmount - item.price);
@@ -86,14 +87,14 @@ function App() {
 
   const handleProceedToPayment = () => {
     if (auth.currentUser) {
-      // Store the payment in Firestore
+      
       storePaymentInFirestore(auth.currentUser.uid, totalAmount, currentList.map(item => item.id));
   
-      // Clear the cart after payment is successful
-      setCurrentList([]); // Empty the cart
-      setTotalAmount(0); // Reset total amount to 0
+      
+      setCurrentList([]);
+      setTotalAmount(0);
   
-      // Navigate to payment view
+      
       setCurrentView('payment');
     }
   };   
@@ -109,6 +110,7 @@ function App() {
       try {
         await signInWithEmailAndPassword(auth, usernameRef.current.value, passwordRef.current.value);
         setUserError(null);
+        setCurrentView('dashboard');
       } catch (error) {
         setUserError('Invalid credentials.');
       }
@@ -167,6 +169,18 @@ function App() {
             />
           )}
         />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login"
+              element={
+            <Login
+                  onLogin={handleSignIn}
+                  userError={userError}
+                  usernameRef={usernameRef}
+                  passwordRef={passwordRef}
+            />
+                      }
+            />
+        
       </Routes>
     </Router>
   );

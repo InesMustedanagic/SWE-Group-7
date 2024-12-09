@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase-config';
 import { Link } from 'react-router-dom';
 
-// Define the props interface
+
 interface LoginProps {
   onLogin: (event: FormEvent<Element>) => Promise<void>;
   userError: string | null;
@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, userError, usernameRef, password
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null);
 
     if (!email || !password) {
       setError('Please enter both email and password');
@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, userError, usernameRef, password
       await signInWithEmailAndPassword(auth, email, password);
       console.log('User logged in');
     } catch (error: any) {
-      setError(error.message); // Display error message
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -49,7 +49,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, userError, usernameRef, password
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            ref={usernameRef}  // Attach ref for username
+            ref={usernameRef} 
             required
           />
         </div>
@@ -60,7 +60,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, userError, usernameRef, password
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            ref={passwordRef}  // Attach ref for password
+            ref={passwordRef} 
             required
           />
         </div>
