@@ -1,5 +1,6 @@
 import React from 'react';
 import './Cart.css';
+import './Cart.css';
 
 interface GroceryItem {
   id: string;
@@ -15,7 +16,13 @@ export interface CartProps {
   onBackToDashboard: () => void;
 }
 
-const Cart: React.FC<CartProps> = ({ currentList, onRemoveItem, totalAmount, onProceedToPayment, onBackToDashboard }) => {
+const Cart: React.FC<CartProps> = ({
+  currentList,
+  onRemoveItem,
+  totalAmount,
+  onProceedToPayment,
+  onBackToDashboard,
+}) => {
   // Function to calculate the total amount
   const calculateTotal = () => {
     return currentList.reduce((sum, item) => sum + (item.price || 0), 0); // Ensure that each item's price is a valid number

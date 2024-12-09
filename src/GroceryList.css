@@ -1,98 +1,93 @@
-
 .grocery-list-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    width: 100%;
-    background-color: #f7f7f7;
-  }
-  
-  .grocery-list-content {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-  }
-  
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  background-color: #121212; /* Dark background for the container */
+  color: #f5f5f5; /* Light text color for contrast */
+}
 
-  .category-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-  
-  .category-item {
-    padding: 15px;
-    background-color: white;
-    color: black;
-    margin: 5px 0;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  .category-item:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .item-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  
-  .item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    width: 100%;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-    color: black;
-  }
-  
-  .item span {
-    flex-grow: 1;
-  }
-  
-  .item button {
-    padding: 5px 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .item button:hover {
-    background-color: #45a049;
-  }
-  
-  
-  .back-to-dashboard {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-to-dashboard:hover {
-    background-color: #0056b3;
-  }
-  
+.grocery-list-content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.category-item {
+  padding: 15px;
+  background-color: #333; /* Darker background for items */
+  color: #ffcc00; /* Yellow text for category names */
+  margin: 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.category-item:hover {
+  background-color: #444; /* Slightly lighter dark background on hover */
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+  background-color: #222; /* Dark background for items */
+  border-bottom: 1px solid #444; /* Subtle divider */
+  color: #f5f5f5;
+}
+
+.item span {
+  flex-grow: 1;
+}
+
+.item button {
+  padding: 10px 20px; /* Increased padding for larger buttons */
+  background-color: #ffcc00; /* Yellow buttons */
+  color: #121212; /* Dark text for readability */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  width: 150px; /* Set a fixed width for the buttons */
+  font-size: 16px; /* Adjust font size if needed */
+}
+
+.item button:hover {
+  background-color: #e6b800; /* Darker yellow on hover */
+}
+
+.back-to-dashboard {
+  margin-top: 20px;
+  padding: 15px 30px; /* Increased padding for a larger button */
+  background-color: #ffcc00; /* Yellow button */
+  color: #121212; /* Dark text for readability */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
