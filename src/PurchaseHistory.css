@@ -6,20 +6,22 @@
     border-radius: 8px;
     background-color: #333333;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 1000px;
+    overflow-y: auto;
     
 }
 
-h2 {
+.purchase-history h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-ul {
+.purchase-history ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.purchase-history li {
     background-color: #444444;
     border-radius: 8px;
     padding: 15px;
@@ -28,22 +30,22 @@ li {
     transition: background-color 0.3s ease;
 }
 
-li:hover {
+.purchase-history li:hover {
     background-color: #555555;
 }
 
-strong {
+.purchase-history strong {
     display: block;
     font-size: 1.1em;
     margin-bottom: 10px;
 }
 
-span {
+.purchase-history span {
     display: block;
     margin-bottom: 5px;
 }
 
-.back-to-dashboard {
+.purchase-history .back-to-dashboard {
     display: block;
     margin: 20px auto;
     padding: 10px;
@@ -55,6 +57,6 @@ span {
     width: 200px;
 }
 
-.back-to-dashboard:hover {
+.purchase-history .back-to-dashboard:hover {
     background-color: #0056b3;
 }

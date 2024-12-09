@@ -110,6 +110,7 @@ function App() {
       try {
         await signInWithEmailAndPassword(auth, usernameRef.current.value, passwordRef.current.value);
         setUserError(null);
+        setCurrentView('dashboard');
       } catch (error) {
         setUserError('Invalid credentials.');
       }
