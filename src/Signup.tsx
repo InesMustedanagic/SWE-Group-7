@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase-config';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -10,11 +9,15 @@ const Signup: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false); // Success state for the message
+  const navigate = useNavigate(); // hook for redirection
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
+    setSuccess(false); // Reset success message on each form submission
 
+    // Validation checks
     if (!email || !password || !confirmPassword) {
       setError('Please fill in all fields');
       return;
@@ -33,12 +36,22 @@ const Signup: React.FC = () => {
     setLoading(true);
 
     try {
+      // Sign up the user
       await createUserWithEmailAndPassword(auth, email, password);
       console.log('User registered');
+
+      // Log in the user automatically after successful sign-up
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log('User logged in');
+
+      // Redirect to the dashboard after successful login
+      setSuccess(true);
+      navigate('/'); // Redirect to the home (dashboard) after login
+
     } catch (error: any) {
-      setError(error.message);
+      setError(error.message); // Handle any errors
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -71,6 +84,7 @@ const Signup: React.FC = () => {
           required
         />
         {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">Sign Up Successful! Redirecting...</div>} {/* Success message */}
         <button type="submit" disabled={loading}>
           {loading ? 'Creating Account...' : 'Sign Up'}
         </button>
