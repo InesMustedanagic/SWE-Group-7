@@ -4,13 +4,28 @@ import { collection, getDocs } from 'firebase/firestore';
 import './PurchaseHistory.css';
 
 
+
+
+// another interface
+// uses dashboard button to return
 interface PurchaseHistoryProps {
   onBackToDashboard: () => void;
 }
 
+
+
+// react component
+// uses for purchase history
+// uses this for firebase 
 const PurchaseHistory: React.FC<PurchaseHistoryProps> = ({ onBackToDashboard }) => {
   const [purchaseHistory, setPurchaseHistory] = useState<any[]>([]);
 
+
+  // this is the purchase history
+  // gets references of the database purchase history
+  // if no error, pulls each purchase, and shows to user
+  // if error it will log
+  // try catch statement
   useEffect(() => {
     const fetchPurchaseHistory = async () => {
       try {
@@ -28,6 +43,13 @@ const PurchaseHistory: React.FC<PurchaseHistoryProps> = ({ onBackToDashboard }) 
     fetchPurchaseHistory();
   }, []);
 
+
+
+  // html code below needs to be commented out up here
+  // basic front end stuff
+  // divs,displaying information, running functions
+  // displaying all recent purchases to users
+  // formatting
   return (
     <div className="purchase-history">
       <h2>Your Purchase History</h2>

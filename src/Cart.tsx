@@ -2,12 +2,18 @@ import React from 'react';
 import './Cart.css';
 import './Cart.css';
 
+
+// same interface as our app file
+// just to match with database
 interface GroceryItem {
   id: string;
   name: string;
   price: number;
 }
 
+// interface for our chosen items in the cart
+// void if we pay or remove the items
+// just storage stuff
 export interface CartProps {
   currentList: GroceryItem[];
   onRemoveItem: (item: GroceryItem) => void;
@@ -16,6 +22,11 @@ export interface CartProps {
   onBackToDashboard: () => void;
 }
 
+
+
+// react component of our cart
+// shows your current stuff, can remove items, total amount, payment, and dashboard
+// all used in a cart
 const Cart: React.FC<CartProps> = ({
   currentList,
   onRemoveItem,
@@ -24,13 +35,25 @@ const Cart: React.FC<CartProps> = ({
   onBackToDashboard,
 }) => {
   
+
+  // using this interface we have functions
+  // this is the total cost of an item
   const calculateTotal = () => {
     return currentList.reduce((sum, item) => sum + (item.price || 0), 0);
   };
-
-
+  
+  
   const total = calculateTotal();
 
+
+
+
+  // returns a div of our screen
+  // some front end work
+  // checks if list is empty and tells user
+  // returns each item, name, price, and allows user to remove item from the list
+  // doesnt allow me to comment down there because of html
+  // basic front end stuff of pressing buttons and displaying information below
   return (
     <div>
       <h2>Your Cart</h2>
@@ -46,7 +69,6 @@ const Cart: React.FC<CartProps> = ({
           </div>
         ))
       )}
-
       <div className="total">
         <strong>Total: ${total.toFixed(2)}</strong>
       </div>

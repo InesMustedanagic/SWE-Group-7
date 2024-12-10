@@ -3,6 +3,9 @@ import './App.css';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 
+
+// interface for our dashboard stuff
+// allows us to visit these different endpoints for our routter
 interface DashboardProps {
   onNavigateToList: () => void;
   onNavigateToCart: () => void;
@@ -11,6 +14,10 @@ interface DashboardProps {
   onNavigateToPurchaseHistory: () => void;
 }
 
+
+// react component to navigate to other places within our project
+// if we are clicking on any of them, we just take them
+// if we logout, we just log them out and tell the user
 const Dashboard: React.FC<DashboardProps> = ({
   onNavigateToList,
   onNavigateToCart,
@@ -27,6 +34,10 @@ const Dashboard: React.FC<DashboardProps> = ({
     }
   };
 
+
+  // need to return html syntax for the file
+  // basic html
+  // buttons with function tied to click of each button
   return (
     <div className="dashboard">
       <button className="back-button" onClick={logout}>

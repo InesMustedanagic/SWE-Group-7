@@ -1,6 +1,12 @@
 import mysql from 'mysql';
 import dotenv from 'dotenv';
 
+// file not used
+// i think this is outdated
+// too late to check test cases on if we can remove this file
+// file not used
+// originally was supposed to be used for connecting to database
+
 dotenv.config();
 
 const db = mysql.createConnection({

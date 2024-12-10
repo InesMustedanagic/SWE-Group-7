@@ -3,6 +3,8 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { browserLocalPersistence, getAuth } from 'firebase/auth';
 
+
+// database credentials
 const firebaseConfig = {
     apiKey: "AIzaSyAaSUj1CSmoJKLoSthzty_PBLYaSFDsImE",
     authDomain: "grocery-website-48384.firebaseapp.com",
@@ -13,16 +15,16 @@ const firebaseConfig = {
     measurementId: "G-RMMCWEVXKQ"
 };
 
-
+// needed for firebase to function
 const app = initializeApp(firebaseConfig);
-
-
 const db = getFirestore(app);
-
 const auth = getAuth(app);
 auth.setPersistence(browserLocalPersistence);
 
 
+// i believe this function got scrapped but too late to run tests on if can be deleted
+// originally made for adding a grocery item, decided to do another way
+// originally supposed to collect grocery information, but this function has been voided
 const addGroceryItem = async (itemName: string, itemPrice: number) => {
     try {
       const docRef = await addDoc(collection(db, 'groceries'), {
@@ -30,9 +32,10 @@ const addGroceryItem = async (itemName: string, itemPrice: number) => {
         price: itemPrice,
         createdAt: new Date(),
       });
-      console.log('Document written with ID: ', docRef.id);
+
+      console.log(docRef.id);
     } catch (e) {
-      console.error('Error adding document: ', e);
+      console.error(e);
     }
   };
 

@@ -1,41 +1,38 @@
-/* Ensure the body and html take up the full height of the screen */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Make sure the entire page takes up the full height */
-  width: 100%;  /* Make sure the entire page takes up the full width */
-  overflow: hidden; /* Prevent any default scrolling from the body */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* The main container that wraps all content */
 .grocery-list-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items at the top of the page */
-  padding: 0; /* No padding around the container */
+  align-items: flex-start;
+  padding: 0;
   width: 100%;
-  height: 100%; /* Full height of the viewport */
-  background-color: #121212; /* Dark background for the container */
-  color: #f5f5f5; /* Light text color for contrast */
+  height: 100%;
+  background-color: #121212;
+  color: #f5f5f5;
   box-sizing: border-box;
 }
 
-/* The content container where the grocery list appears */
+
 .grocery-list-content {
   width: 100%;
-  max-width: 1200px; /* Optional: Max width for the content */
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Full height of the container */
-  overflow-y: auto; /* Enable vertical scrolling */
+  height: 100%;
+  overflow-y: auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #1e1e1e; /* Optional background color for better contrast */
+  background-color: #1e1e1e;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Adds a subtle shadow around the content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Category list styling */
 .category-list {
   list-style: none;
   padding: 0;
@@ -63,7 +60,7 @@ html, body {
   background-color: #444;
 }
 
-/* Item list styling */
+
 .item-list {
   list-style: none;
   padding: 0;

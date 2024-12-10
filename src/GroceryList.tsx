@@ -1,22 +1,41 @@
 import React, { useState } from 'react';
 import './GroceryList.css';
 
+
+// interface for our items
+// shown previously in project
+// stores in firebase
 interface GroceryItem {
   id: string;
   name: string;
   price: number;
 }
 
+
+// another reused interface
 interface GroceryListProps {
   groceryItems: GroceryItem[];
   onAddToCart: (item: GroceryItem) => void;
   onBackToDashboard: () => void;
 }
 
+
+// new interface
+// used to associate items with their category
+// for example, milk associated with dairy caregory
 interface CategoryItem {
   name: string;
   price: number;
 }
+
+
+
+
+
+// each category being associated with their own record
+// string of what the category is named
+// followed by whatever item and price
+// reused a couple times for each category
 
 const categories: Record<string, CategoryItem[]> = {
   Beverages: [
@@ -120,33 +139,56 @@ const categories: Record<string, CategoryItem[]> = {
   ]
 };
 
-const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, onBackToDashboard }) => {
-  const [searchTerm, setSearchTerm] = useState<string>(''); // Search term state
-  const [expandedCategory, setExpandedCategory] = useState<string | null>(null); // Expanded category state
 
-  // Function to filter items across all categories based on the search term
+
+
+// creating react component
+// used for string search
+// also used to expand the individual category tab
+// if viewing a category, can open and see items in the category
+const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, onBackToDashboard }) => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+
+  // this search option takes the string the users input
+  // this turns to lowercase and looks for all items that match the string input by the user
   const filterItems = (items: CategoryItem[]) => {
     return items.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
   };
 
-  // Filter items globally across all categories
+  
+  // this filters for what matches your search, if empty, doesnt matter
   const filteredItems = Object.values(categories).flatMap(category => filterItems(category));
+
+
+
+
+
+  // have to comment all html code below from here
+  // basic html front end work of formatting
+  // matching values with buttons and divs
+  // search is updated from each change of the search bar
+  // this dynamically updates the search by each change of the bar
+  // shows every category if the search is empty
+  // shows items in categories once clicked on
 
   return (
     <div className="grocery-list-container">
       <div className="grocery-list-content">
-        {/* Search Field */}
+        {/* search */}
         <div className="search-container">
           <input
             type="text"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+            onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for an item..."
             className="search-input"
           />
         </div>
 
-        {/* Show Filtered Items When Search Term Exists */}
+
+        {/* shows filtered items */}
         {searchTerm && filteredItems.length > 0 && (
           <div className="filtered-items">
             <h3>Filtered Items</h3>
@@ -163,7 +205,9 @@ const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, on
           </div>
         )}
 
-        {/* Show Categories If Search Term Is Empty */}
+
+
+        {/* shows if empty */}
         {!searchTerm && (
           <ul className="category-list">
             {Object.keys(categories).map((category, categoryIndex) => {
@@ -173,7 +217,7 @@ const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, on
                     <strong>{category.replace('_', ' ')}</strong>
                   </div>
 
-                  {/* Show items only if category is expanded */}
+                  {/* show item when expanded */}
                   {expandedCategory === category && (
                     <ul className="item-list">
                       {categories[category].map((item, index) => (
@@ -192,7 +236,7 @@ const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, on
           </ul>
         )}
 
-        {/* Back to Dashboard Button */}
+        {/* dashboard button */}
         <button className="back-to-dashboard" onClick={onBackToDashboard}>
           Back to Dashboard
         </button>
@@ -201,4 +245,7 @@ const GroceryList: React.FC<GroceryListProps> = ({ groceryItems, onAddToCart, on
   );
 };
 
+
+// all code above is functionality of the dashboard
+// the search feature, expansion of a category, dashboard button 
 export default GroceryList;
